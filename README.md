@@ -22,8 +22,6 @@ void main() async {
   // Only one promise is run at once
   final results = await Future.wait(input);
   print(results);
-
-  limit.
 }
 
 ```
