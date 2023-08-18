@@ -82,7 +82,9 @@ You probably don't need this optimization unless you're pushing a lot of functio
 
 ## Related
 
-- [async_task](https://github.com/eneural-net/async_task) - Asynchronous tasks and parallel executors
+- [async_task](https://pub.dev/packages/async_task) - Asynchronous tasks and parallel executors
+- [concurrent_queue](https://pub.dev/packages/concurrent_queue) - Priority queue with concurrency control
+
 
 ## Additional information
 
