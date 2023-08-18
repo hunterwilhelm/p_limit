@@ -1,3 +1,5 @@
+Run multiple promise-returning & async functions with limited concurrency
+
 ## Install
 
 ```
