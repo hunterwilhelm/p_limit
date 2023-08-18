@@ -1,6 +1,6 @@
 name: p_limit
-description: Run multiple promise-returning & async functions with limited concurrency.
-version: 1.0.1
+description: Run multiple future-returning & async functions with limited concurrency.
+version: 1.0.2
 repository: https://github.com/hunterwilhelm/p_limit
 homepage: https://github.com/hunterwilhelm/p_limit
 issue_tracker: https://github.com/hunterwilhelm/p_limit/issues

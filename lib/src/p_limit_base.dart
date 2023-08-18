@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:collection';
 
-/// Run multiple promise-returning & async functions with limited concurrency.
+/// Run multiple future-returning & async functions with limited concurrency.
 class PLimit<T> {
-  /// The number of promises that are currently running.
+  /// The number of futures that are currently running.
   int get activeCount => _activeCount;
 
-  // The number of promises that are waiting to run (i.e. their internal fn was not called yet).
+  // The number of futures that are waiting to run (i.e. their internal fn was not called yet).
   int get pendingCount => _queue.length;
 
-  /// Run multiple promise-returning & async functions with limited concurrency.
+  /// Run multiple future-returning & async functions with limited concurrency.
   ///
   /// [concurrency] - Concurrency limit. Minimum: `1`.
   ///
@@ -66,18 +66,18 @@ class PLimit<T> {
     });
   }
 
-  /// Returns the promise returned by calling fn().
+  /// Returns the future returned by calling fn().
   Future<T> call(Future<T> Function() fn) async {
     final completer = Completer<T>();
     _enqueue(fn, completer.complete, completer.completeError);
     return completer.future;
   }
 
-  /// Discard pending promises that are waiting to run.
+  /// Discard pending futures that are waiting to run.
   ///
   /// This might be useful if you want to teardown the queue at the end of your program's lifecycle or discard any function calls referencing an intermediary state of your app.
   ///
-  /// Note: This does not cancel promises that are already running.
+  /// Note: This does not cancel futures that are already running.
   void clearQueue() {
     _queue.clear();
   }

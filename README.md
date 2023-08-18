@@ -1,4 +1,8 @@
-Run multiple promise-returning & async functions with limited concurrency
+Run multiple future-returning & async functions with limited concurrency
+
+## Motivation
+
+This is a port of [p-limit](https://www.npmjs.com/package/p-limit) from javascript to dart.
 
 ## Install
 
@@ -19,7 +23,7 @@ void main() async {
     limit(() => fetchSomething('bar')),
     limit(() => doSomething())
   ];
-  // Only one promise is run at once
+  // Only one future is run at once
   final results = await Future.wait(input);
   print(results);
 }
@@ -42,35 +46,39 @@ Concurrency limit.
 
 ### limit(fn)
 
-Returns the promise returned by calling `fn()`.
+Returns the future returned by calling `fn()`.
 
 #### fn
 
 Type: `Function`
 
-Promise-returning/async function.
+Future-returning/async function.
 
 ### limit.activeCount
 
-The number of promises that are currently running.
+The number of futures that are currently running.
 
 ### limit.pendingCount
 
-The number of promises that are waiting to run (i.e. their internal `fn` was not called yet).
+The number of futures that are waiting to run (i.e. their internal `fn` was not called yet).
 
 ### limit.clearQueue()
 
-Discard pending promises that are waiting to run.
+Discard pending futures that are waiting to run.
 
 This might be useful if you want to teardown the queue at the end of your program's lifecycle or discard any function calls referencing an intermediary state of your app.
 
-Note: This does not cancel promises that are already running.
+Note: This does not cancel futures that are already running.
 
 ## FAQ
 
 ### How is this different from the [`async_task`](https://github.com/eneural-net/async_task) package?
 
 This package is only about limiting the number of concurrent executions, while `async_task` is a fully featured queue implementation similar to classic thread pools and with lots of different options.
+
+### But what about args?
+
+You probably don't need this optimization unless you're pushing a lot of functions. If you are in need of this, make a pull request or an issue on [Github](https://github.com/hunterwilhelm/p_limit/issues).
 
 ## Related
 
@@ -79,3 +87,7 @@ This package is only about limiting the number of concurrent executions, while `
 ## Additional information
 
 If you have an issue, let me know on [Github issues](https://github.com/hunterwilhelm/p_limit/issues)
+
+## Special Thanks
+
+Since this is a port of [p-limit](https://www.npmjs.com/package/p-limit), I'd like to thank the creator for the amazing work and maintenance. 

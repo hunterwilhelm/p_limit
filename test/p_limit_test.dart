@@ -93,7 +93,7 @@ void main() {
     expect(limit.activeCount, 0);
     expect(limit.pendingCount, 0);
 
-    final runningPromise1 = limit(() async {
+    final runningfuture1 = limit(() async {
       await Future.delayed(const Duration(milliseconds: 1000));
     });
     expect(limit.activeCount, 0);
@@ -103,22 +103,22 @@ void main() {
     expect(limit.activeCount, 1);
     expect(limit.pendingCount, 0);
 
-    await runningPromise1;
+    await runningfuture1;
     expect(limit.activeCount, 0);
     expect(limit.pendingCount, 0);
 
-    final immediatePromises = List.generate(5, (_) => limit(() async => Future.delayed(const Duration(milliseconds: 1000))));
-    final delayedPromises = List.generate(3, (_) => limit(() async => Future.delayed(const Duration(milliseconds: 1000))));
+    final immediatefutures = List.generate(5, (_) => limit(() async => Future.delayed(const Duration(milliseconds: 1000))));
+    final delayedfutures = List.generate(3, (_) => limit(() async => Future.delayed(const Duration(milliseconds: 1000))));
 
     await Future.delayed(const Duration(milliseconds: 1));
     expect(limit.activeCount, 5);
     expect(limit.pendingCount, 3);
 
-    await Future.wait(immediatePromises);
+    await Future.wait(immediatefutures);
     expect(limit.activeCount, 3);
     expect(limit.pendingCount, 0);
 
-    await Future.wait(delayedPromises);
+    await Future.wait(delayedfutures);
 
     expect(limit.activeCount, 0);
     expect(limit.pendingCount, 0);
