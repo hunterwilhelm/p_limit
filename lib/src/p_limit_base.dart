@@ -6,7 +6,7 @@ class PLimit<T> {
   /// The number of futures that are currently running.
   int get activeCount => _activeCount;
 
-  // The number of futures that are waiting to run (i.e. their internal fn was not called yet).
+  /// The number of futures that are waiting to run (i.e. their internal fn was not called yet).
   int get pendingCount => _queue.length;
 
   /// Run multiple future-returning & async functions with limited concurrency.
